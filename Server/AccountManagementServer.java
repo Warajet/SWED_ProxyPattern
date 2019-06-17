@@ -3,6 +3,7 @@ import java.rmi.Naming;
 public class AccountManagementServer {
     public static void main(String[] args){
         try {
+            // Create Server Helper
             AccountManagementImpl accountServer = new AccountManagementImpl("Tim Cook");
             Naming.rebind("AccountManagementServer",accountServer);
             System.out.println("Server starts");
