@@ -11,6 +11,7 @@ import java.util.Scanner;
 
 public class AccountManagementClient {
     public static void main(String[] args) throws RemoteException, NotBoundException, MalformedURLException {
+        // Create Client Helper
         AccountManagementRemote account_server = (AccountManagementRemote) Naming.lookup("rmi://"+"localhost"+"/AccountManagementServer");
 
         Scanner user_inp = new Scanner(System.in);
@@ -36,11 +37,13 @@ public class AccountManagementClient {
 
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     String current_date = simpleDateFormat.format(new Date());
+                    // Call addAccountEntry() via Client Helper
                     account_server.addAccountEntry(account_entry_name, current_date, account_entry_amount);
 
                 }
                 if (input == 2) {
                     System.out.println("Get Account Entries");
+                    // Call get_all_account_entries() via Client Helper
                     ArrayList<AccountEntry> entries = account_server.get_all_account_entries();
                     if(entries.size() == 0)
                     {
@@ -57,6 +60,7 @@ public class AccountManagementClient {
                     Scanner amount_inp = new Scanner(System.in);
                     System.out.println("Please specify the amount: ");
                     double account_entry_amount = amount_inp.nextDouble();
+                    // Call search_entry_by_amount() via Client Helper
                     ArrayList<AccountEntry> entries_by_amount = account_server.search_entry_by_amount(account_entry_amount);
                     if(entries_by_amount.size() == 0 )
                     {
@@ -71,6 +75,7 @@ public class AccountManagementClient {
                 if(input == 4)
                 {
                     System.out.println("Display Account name");
+                    // Call get_account_name() via Client Helper
                     System.out.println(account_server.get_account_name());
                 }
                 break;
